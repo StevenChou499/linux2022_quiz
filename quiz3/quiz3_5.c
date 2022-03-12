@@ -1,31 +1,31 @@
 #include <limits.h>
 #include <stdio.h>
 
-int divide(int dividend, int divisor) // eg. dividend = 10, divisor = 3
+int divide(int dividend, int divisor) // eg. dividend = 133, divisor = 7
 {
     int signal = 1;
-    unsigned int dvd = dividend; // dvd = 10
+    unsigned int dvd = dividend; // dvd = 133
     if (dividend < 0) { // check if dividend is negative
         signal *= -1;
         dvd = ~dvd + 1;
     }
 
-    unsigned int dvs = divisor; // dvs = 3
+    unsigned int dvs = divisor; // dvs = 7
     if (divisor < 0) { // check if divisor is negative
         signal *= -1;
         dvs = ~dvs + 1;
     }
 
     int shift = 0;
-    while (dvd > (dvs << shift)) // dvd = 10, dvs << shift = 3, shift++, dvd = 10, dvs << shift = 6, shift++
-        shift++; // shift = 2
+    while (dvd > (dvs << shift)) // dvd = 133, dvs = 7, 14, 28, 56, 112, 224, shift = 0, 1, 2, 3, 4, 5
+        shift++; // shift = 5
 
     unsigned int res = 0;
     while (dvd >= dvs) {
-        while (dvd < (dvs << shift)) // dvd = 10, dvs << shift = 12, shift--
-            shift--; // shift = 1
-        res |= (unsigned int) 1 << shift;
-        dvd -= res;
+        while (dvd < (dvs << shift)) // dvd = 133
+            shift--; // shift = 4
+        res |= (unsigned int) 1 << shift; // res = 1 << 4 = 16
+        dvd -= (1 << shift) * dvs;
     }
 
     if (signal == 1 && res >= INT_MAX)
@@ -33,16 +33,15 @@ int divide(int dividend, int divisor) // eg. dividend = 10, divisor = 3
     return res * signal;
 }
 
+
 int main()
 {
-    int a = 133;
-    int b = 3;
-    /*for(int i = 1; i < 100; i++){
-        if(divide(133, i) != (133 / i)){
-            printf("It isn't the same!!\n");
+    for(int i = 1; i < 500; i++){
+        for(int y = 1; y <= i; y++){
+            if(divide(i, y) != (i / y)){
+                printf("It isn't the same!!\n");
+            }
         }
-        printf("%d\n", i);
-    }*/
-    printf("%d / %d = %d by divide and %d by /\n", a, b, divide(a, b), a / b);
+    }
     return 0;
 }
