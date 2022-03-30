@@ -29,23 +29,24 @@ static inline unsigned long fls(unsigned long word)
     return num;
 } 
 
-unsigned long i_sqrt(unsigned long x) // x = 8
+unsigned long i_sqrt(unsigned long x) // x = 4
 {
     unsigned long b, m, y = 0;
 
     if (x <= 1)
         return x;
 
-    m = 1UL << (fls(x) & ~1UL); // fls(8) = 3, 3 & ~1UL = 2, m = 4
+    m = 1UL << (fls(x) & ~1UL); // fls() = 2, 2 & ~1UL = 2, m = 4
     while (m) {
         b = y + m; // b = 4
-        // XXX;
+        x += y; // x = 0, b = 4
 
         if (x >= b) {
-            // YYY;
-            y += m;
+            x -= b;
+            y += m; // y += 4;
         }
-        // ZZZ;
+        m >>= 1;
+        printf("y = %ld\n", y);
     }
 
     return y;
@@ -53,7 +54,11 @@ unsigned long i_sqrt(unsigned long x) // x = 8
 
 int main()
 {
-    unsigned long a = 7;
+    unsigned long a = 4;
     printf("fls(%ld) = %ld\n", a, fls(a));
+    printf("i_sqrt(%ld) = %ld\n", a, i_sqrt(a));
+    /*for(unsigned long i = 0UL; i < 100UL; i++){
+        printf("i_sqrt(%ld) = %ld\n", i, i_sqrt(i));
+    }*/
     return 0;
 }
