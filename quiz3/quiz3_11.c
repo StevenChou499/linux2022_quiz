@@ -46,7 +46,7 @@ unsigned long i_sqrt(unsigned long x) // x = 4
             y += m; // y += 4;
         }
         m >>= 2;
-        printf("y = %ld\n", y);
+        // printf("y = %ld\n", y);
     }
 
     return y;
@@ -54,8 +54,8 @@ unsigned long i_sqrt(unsigned long x) // x = 4
 
 int main()
 {
-    unsigned long a = 4;
-    printf("fls(%ld) = %ld\n", a, fls(a));
+    unsigned long a = 81;
+    // printf("fls(%ld) = %ld\n", a, fls(a));
     printf("i_sqrt(%ld) = %ld\n", a, i_sqrt(a));
     /*for(unsigned long i = 0UL; i < 100UL; i++){
         printf("i_sqrt(%ld) = %ld\n", i, i_sqrt(i));

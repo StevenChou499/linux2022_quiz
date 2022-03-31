@@ -16,7 +16,7 @@ int ilog32(uint32_t v) // v = 34
     m = (v > 0x3U) << 1; // 0x3U  = 3, v < 0x3U, m = 0
     v >>= m; // v >> 0, v = 2
     ret |= m; // ret = 5
-    ret += (v > 0x1U);
+    ret |= (v > 0x1U);
     return ret;
 }
 
