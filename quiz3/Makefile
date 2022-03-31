@@ -1,5 +1,5 @@
 CC = gcc
-FILE = quiz3_10
+FILE = quiz3_11
 
 check:
 	@$(CC) -o $(FILE) $(FILE).c

@@ -39,13 +39,13 @@ unsigned long i_sqrt(unsigned long x) // x = 4
     m = 1UL << (fls(x) & ~1UL); // fls() = 2, 2 & ~1UL = 2, m = 4
     while (m) {
         b = y + m; // b = 4
-        x += y; // x = 0, b = 4
+        y >>= 1; // x = 0, b = 4
 
         if (x >= b) {
             x -= b;
             y += m; // y += 4;
         }
-        m >>= 1;
+        m >>= 2;
         printf("y = %ld\n", y);
     }
 
