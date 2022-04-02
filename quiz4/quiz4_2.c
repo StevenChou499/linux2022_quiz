@@ -37,6 +37,6 @@ int main()
     /*for(unsigned long i = 0; i < 100UL; i++){
         printf("ffs(%lu) = %lu\n", i, fuck(i));
     }*/
-    printf("ffs(%lu) = %lu\n", 32768*2, fuck(32768*2));
+    printf("ffs(%lu) = %lu\n", 16UL, fuck(16UL));
     return 0;
 }
